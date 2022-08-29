@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    public SoundManager sndManager;
+
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
