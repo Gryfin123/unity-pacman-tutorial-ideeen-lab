@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
     public int lives { get; private set; }
+    private Coroutine introCoroutine;
 
     private void Start()
     {
@@ -30,6 +31,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator RoundStartSequence()
+    {
+        sndManager.PlayIntro();
+        PrepareNewRound();
+        PauseGame();
+        yield return new WaitForSeconds(5f);
+        ResumeGame();
+    }
+
     private void NewGame()
     {
         SetScore(0);
@@ -38,6 +48,11 @@ public class GameManager : MonoBehaviour
     }
 
     private void NewRound()
+    {
+        introCoroutine = StartCoroutine(RoundStartSequence());
+    }
+
+    private void PrepareNewRound()
     {
         gameOverText.enabled = false;
 
@@ -142,4 +157,15 @@ public class GameManager : MonoBehaviour
         ghostMultiplier = 1;
     }
 
+    private void PauseGame()
+    {
+        // TO DO:
+        // Ghost and pac-man can't move
+    }
+
+    private void ResumeGame()
+    {
+        // TO DO:
+        // Ghosts and pac-man can move
+    }
 }
