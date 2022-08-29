@@ -62,10 +62,6 @@ public class GameManager : MonoBehaviour
         introCoroutine = StartCoroutine(IntroSequence());
     }
 
-    private void PrepareNewRoundPellets()
-    {
-    }
-
     private void ResetState()
     {
         for (int i = 0; i < ghosts.Length; i++) {

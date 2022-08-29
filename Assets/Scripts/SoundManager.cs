@@ -6,8 +6,15 @@ public class SoundManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AudioSource _pelletAudioSource;
-    [SerializeField] private bool _hasChompSoundQueued = false;
     [SerializeField] private float _defaultVolume = 1f;
+
+    [Header("Pellet Sound Settings")]
+    // Current duration for pellet sound loop
+    [SerializeField] private float _chompSoundDuration = 0f;
+    // How long after picking pellet, pellet eating sound is supposed to keep on playing
+    [SerializeField] private float _chompSoundIncrement = 0f;
+    // Max for how long after picking pellet, pellet eating sound is supposed to keep on playing
+    [SerializeField] private float _chompSoundMaxReserve = 0.4f;  
 
     [Header("Clip References")]
     [SerializeField] private AudioClip _introSong;
@@ -24,12 +31,14 @@ public class SoundManager : MonoBehaviour
     private void ProcessChompingSound()
     {
         // Process Pellet sounds
-        if (!_pelletAudioSource.isPlaying && _hasChompSoundQueued)
+        if (_chompSoundDuration > 0)
         {
-            _pelletAudioSource.clip = _pelletChomp;
             _pelletAudioSource.volume = _defaultVolume;
-            _pelletAudioSource.Play();
-            _hasChompSoundQueued = false;
+            _chompSoundDuration -= Time.deltaTime;
+        }
+        else
+        {
+            _pelletAudioSource.volume = 0;
         }
     }
 
@@ -46,7 +55,8 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayChomp()
     {        
-        _hasChompSoundQueued = true;
+        _chompSoundDuration += _chompSoundIncrement;
+        if (_chompSoundDuration > _chompSoundMaxReserve) _chompSoundDuration = _chompSoundMaxReserve;
     }
     public void PlayEatFruit()
     {
