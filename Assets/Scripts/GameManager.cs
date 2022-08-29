@@ -31,10 +31,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator RoundStartSequence()
+    private IEnumerator IntroSequence()
     {
         sndManager.PlayIntro();
-        PrepareNewRound();
         PauseGame();
         yield return new WaitForSeconds(5f);
         ResumeGame();
@@ -49,11 +48,6 @@ public class GameManager : MonoBehaviour
 
     private void NewRound()
     {
-        introCoroutine = StartCoroutine(RoundStartSequence());
-    }
-
-    private void PrepareNewRound()
-    {
         gameOverText.enabled = false;
 
         foreach (Transform pellet in pellets) {
@@ -63,6 +57,15 @@ public class GameManager : MonoBehaviour
         ResetState();
     }
 
+    private void PlayIntroSequence()
+    {
+        introCoroutine = StartCoroutine(IntroSequence());
+    }
+
+    private void PrepareNewRoundPellets()
+    {
+    }
+
     private void ResetState()
     {
         for (int i = 0; i < ghosts.Length; i++) {
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
         }
 
         pacman.ResetState();
+        PlayIntroSequence();
     }
 
     private void GameOver()

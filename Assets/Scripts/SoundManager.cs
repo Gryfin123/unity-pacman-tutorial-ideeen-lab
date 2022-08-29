@@ -45,11 +45,8 @@ public class SoundManager : MonoBehaviour
         PlayClip(_introSong);
     }
     public void PlayChomp()
-    {
-        if (!_pelletAudioSource.isPlaying)
-        {
+    {        
         _hasChompSoundQueued = true;
-        }
     }
     public void PlayEatFruit()
     {
