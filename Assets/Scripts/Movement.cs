@@ -4,6 +4,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 8f;
+    private float initialSpeed;
     public float speedMultiplier = 1f;
     public Vector2 initialDirection;
     public LayerMask obstacleLayer;
@@ -22,6 +23,7 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         ResetState();
+        initialSpeed = speed;
     }
 
     public void ResetState()
@@ -72,6 +74,11 @@ public class Movement : MonoBehaviour
         // If no collider is hit then there is no obstacle in that direction
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0f, direction, 1.5f, obstacleLayer);
         return hit.collider != null;
+    }
+
+    public float GetInitialSpeed()
+    {
+        return initialSpeed;
     }
 
 }

@@ -162,13 +162,19 @@ public class GameManager : MonoBehaviour
 
     private void PauseGame()
     {
-        // TO DO:
         // Ghost and pac-man can't move
+        for (int i = 0; i < ghosts.Length; i++) {
+            ghosts[i].GetComponent<Movement>().speed = 0;
+        }
+        pacman.GetComponent<Movement>().speed = 0;
     }
 
     private void ResumeGame()
     {
-        // TO DO:
         // Ghosts and pac-man can move
+        for (int i = 0; i < ghosts.Length; i++) {
+            ghosts[i].GetComponent<Movement>().speed = ghosts[i].GetComponent<Movement>().GetInitialSpeed();
+        }
+        pacman.GetComponent<Movement>().speed = pacman.GetComponent<Movement>().GetInitialSpeed();
     }
 }
