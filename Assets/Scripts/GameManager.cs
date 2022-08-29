@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
+        sndManager.PlayDeath();
         pacman.DeathSequence();
 
         SetLives(lives - 1);
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void GhostEaten(Ghost ghost)
     {
+        sndManager.PlayEatGhost();
         int points = ghost.points * ghostMultiplier;
         SetScore(score + points);
 
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
 
     public void PelletEaten(Pellet pellet)
     {
+        sndManager.PlayChomp();
         pellet.gameObject.SetActive(false);
 
         SetScore(score + pellet.points);
