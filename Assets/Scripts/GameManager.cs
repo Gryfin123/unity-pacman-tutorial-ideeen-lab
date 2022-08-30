@@ -4,15 +4,19 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("References")]
     public SoundManager sndManager;
 
+    [Header("Game Object References")]
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
 
+    [Header("UI")]
     public Text gameOverText;
     public Text scoreText;
     public Text livesText;
+    public Transform gameOverButtons;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -23,7 +27,6 @@ public class GameManager : MonoBehaviour
     {
         NewGame();
     }
-
     private void Update()
     {
         if (lives <= 0 && Input.anyKeyDown) {
@@ -46,15 +49,15 @@ public class GameManager : MonoBehaviour
         SetLives(3);
         NewRound();
     }
-
     private void NewRound()
     {
         gameOverText.enabled = false;
+        HideMenuButtons();
 
         foreach (Transform pellet in pellets) {
             pellet.gameObject.SetActive(true);
         }
-
+        
         ResetState();
     }
 
@@ -82,6 +85,15 @@ public class GameManager : MonoBehaviour
         }
 
         pacman.gameObject.SetActive(false);
+        Invoke(nameof(ShowMenuButtons), 2f);
+    }
+    private void ShowMenuButtons()
+    {
+        gameOverButtons.gameObject.SetActive(true);
+    }
+    private void HideMenuButtons()
+    {
+        gameOverButtons.gameObject.SetActive(false);
     }
 
     private void SetLives(int lives)
@@ -95,6 +107,7 @@ public class GameManager : MonoBehaviour
         this.score = score;
         scoreText.text = score.ToString().PadLeft(2, '0');
     }
+
 
     public void PacmanEaten()
     {
@@ -148,6 +161,7 @@ public class GameManager : MonoBehaviour
         sndManager.Invoke(nameof(sndManager.PlayBackgroundMusicStandard), pellet.duration);
     }
 
+
     private bool HasRemainingPellets()
     {
         foreach (Transform pellet in pellets)
@@ -164,6 +178,7 @@ public class GameManager : MonoBehaviour
     {
         ghostMultiplier = 1;
     }
+
 
     private void PauseGame()
     {
