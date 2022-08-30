@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         sndManager.PlayIntro();
         PauseGame();
         yield return new WaitForSeconds(5f);
+        sndManager.PlayBackgroundMusicStandard();
         ResumeGame();
     }
 
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
+        sndManager.StopBackgroundMusic();
         sndManager.PlayDeath();
         pacman.DeathSequence();
 
@@ -139,8 +141,11 @@ public class GameManager : MonoBehaviour
         }
 
         PelletEaten(pellet);
+        sndManager.PlayBackgroundMusicFrightened();
         CancelInvoke(nameof(ResetGhostMultiplier));
+        sndManager.CancelInvoke(nameof(sndManager.PlayBackgroundMusicStandard));
         Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+        sndManager.Invoke(nameof(sndManager.PlayBackgroundMusicStandard), pellet.duration);
     }
 
     private bool HasRemainingPellets()

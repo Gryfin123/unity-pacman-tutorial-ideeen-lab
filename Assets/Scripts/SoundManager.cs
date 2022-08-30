@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AudioSource _pelletAudioSource;
+    [SerializeField] private AudioSource _backgroundAudioSource;
     [SerializeField] private float _defaultVolume = 1f;
 
     [Header("Pellet Sound Settings")]
@@ -18,10 +19,17 @@ public class SoundManager : MonoBehaviour
 
     [Header("Clip References")]
     [SerializeField] private AudioClip _introSong;
+    [SerializeField] private AudioClip _backgroundStandard;
+    [SerializeField] private AudioClip _backgroundFrightened;
     [SerializeField] private AudioClip _pelletChomp;
     [SerializeField] private AudioClip _eatFruit;
     [SerializeField] private AudioClip _eatGhost;
     [SerializeField] private AudioClip _death;
+
+    private void Start() {
+        _pelletAudioSource.clip = _pelletChomp;
+        _backgroundAudioSource.clip = _backgroundStandard;
+    }
 
     private void Update() {
         ProcessChompingSound();
@@ -40,6 +48,23 @@ public class SoundManager : MonoBehaviour
         {
             _pelletAudioSource.volume = 0;
         }
+    }
+
+    public void PlayBackgroundMusicStandard()
+    {
+        _backgroundAudioSource.clip = _backgroundStandard;
+        _backgroundAudioSource.Play();
+    }
+
+    public void PlayBackgroundMusicFrightened()
+    {
+        _backgroundAudioSource.clip = _backgroundFrightened;
+        _backgroundAudioSource.Play();
+    }
+
+    public void StopBackgroundMusic()
+    {
+        _backgroundAudioSource.Stop();
     }
 
 
