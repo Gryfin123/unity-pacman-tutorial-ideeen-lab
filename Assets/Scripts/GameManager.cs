@@ -27,12 +27,6 @@ public class GameManager : MonoBehaviour
     {
         NewGame();
     }
-    private void Update()
-    {
-        if (lives <= 0 && Input.anyKeyDown) {
-            NewGame();
-        }
-    }
 
     private IEnumerator IntroSequence()
     {
@@ -43,10 +37,10 @@ public class GameManager : MonoBehaviour
         ResumeGame();
     }
 
-    private void NewGame()
+    public void NewGame()
     {
         SetScore(0);
-        SetLives(3);
+        SetLives(1);
         NewRound();
     }
     private void NewRound()
