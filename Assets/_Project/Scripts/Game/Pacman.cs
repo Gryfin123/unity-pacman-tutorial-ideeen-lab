@@ -34,8 +34,7 @@ public class Pacman : MonoBehaviour
         // }
 
         var inputDevice = InputManager.ActiveDevice;
-        Debug.Log("X: " + inputDevice.LeftStickX.LastValue + " | Y: " + inputDevice.LeftStickY.LastValue);
-
+        
         // Set the new direction based on the current input
         if (inputDevice.LeftStickY.LastValue > 0.5) {
             movement.SetDirection(Vector2.up);
