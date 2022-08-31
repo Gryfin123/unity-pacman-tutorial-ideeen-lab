@@ -207,7 +207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 664354439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 469897153}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &37903692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,6 +766,7 @@ MonoBehaviour:
   _eatFruit: {fileID: 8300000, guid: 18f85245becfe734592d851fb2a20e92, type: 3}
   _eatGhost: {fileID: 8300000, guid: 486f51843afb54e4584dcb1c986fe899, type: 3}
   _death: {fileID: 8300000, guid: efc3b2b1f0396d149aa29c41cb62f0b6, type: 3}
+  _click: {fileID: 8300000, guid: 9f49ef41f3ee80743873dcfd59b000d6, type: 3}
 --- !u!82 &469897155
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2453,6 +2466,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 469897153}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 469897157}
         m_TargetAssemblyTypeName: NavigationScript, Assembly-CSharp
         m_MethodName: LoadAnotherScene
@@ -8867,6 +8892,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 469897153}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 469897151}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: NewGame

@@ -25,14 +25,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip _eatFruit;
     [SerializeField] private AudioClip _eatGhost;
     [SerializeField] private AudioClip _death;
+    [SerializeField] private AudioClip _click;
 
     private void Start() {
-        _pelletAudioSource.clip = _pelletChomp;
-        _backgroundAudioSource.clip = _backgroundStandard;
+        if (_pelletAudioSource != null) _pelletAudioSource.clip = _pelletChomp;
+        if (_backgroundAudioSource != null) _backgroundAudioSource.clip = _backgroundStandard;
     }
 
     private void Update() {
-        ProcessChompingSound();
+        if (_pelletAudioSource != null) ProcessChompingSound();
     }
 
     /// Prcess how to play pellet eating sounds
@@ -41,7 +42,7 @@ public class SoundManager : MonoBehaviour
         // Process Pellet sounds
         if (_chompSoundDuration > 0)
         {
-            _pelletAudioSource.volume = _defaultVolume * 0.7f;
+            _pelletAudioSource.volume = _defaultVolume * 0.2f;
             _chompSoundDuration -= Time.deltaTime;
         }
         else
@@ -52,21 +53,30 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBackgroundMusicStandard()
     {
-        _pelletAudioSource.volume = _defaultVolume * 0.85f;
-        _backgroundAudioSource.clip = _backgroundStandard;
-        _backgroundAudioSource.Play();
+        if (_backgroundAudioSource != null)
+        {
+            _backgroundAudioSource.volume = _defaultVolume * 0.85f;
+            _backgroundAudioSource.clip = _backgroundStandard;
+            _backgroundAudioSource.Play();
+        }
     }
 
     public void PlayBackgroundMusicFrightened()
     {
-        _pelletAudioSource.volume = _defaultVolume * 0.85f;
-        _backgroundAudioSource.clip = _backgroundFrightened;
-        _backgroundAudioSource.Play();
+        if (_backgroundAudioSource != null)
+        {
+            _backgroundAudioSource.volume = _defaultVolume * 0.85f;
+            _backgroundAudioSource.clip = _backgroundFrightened;
+            _backgroundAudioSource.Play();
+        }
     }
 
     public void StopBackgroundMusic()
     {
-        _backgroundAudioSource.Stop();
+        if (_backgroundAudioSource != null)
+        {
+            _backgroundAudioSource.Stop();
+        }
     }
 
 
@@ -96,5 +106,9 @@ public class SoundManager : MonoBehaviour
     public void PlayDeath()
     {
         PlayClip(_death);
+    }
+    public void PlayClick()
+    {
+        PlayClip(_click);
     }
 }
