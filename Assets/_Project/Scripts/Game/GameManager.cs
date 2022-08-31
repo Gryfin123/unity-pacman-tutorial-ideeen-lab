@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("References")]
     public SoundManager sndManager;
+    public GameObject inControlControls;
 
     [Header("Game Object References")]
     public Ghost[] ghosts;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
         
         ResetState();
+        EnableInControlJoystick();
     }
 
     private void PlayIntroSequence()
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
+        DisableInControlJoystick();
         sndManager.StopBackgroundMusic();
         sndManager.PlayDeath();
         pacman.DeathSequence();
@@ -190,5 +193,15 @@ public class GameManager : MonoBehaviour
             ghosts[i].GetComponent<Movement>().speed = ghosts[i].GetComponent<Movement>().GetInitialSpeed();
         }
         pacman.GetComponent<Movement>().speed = pacman.GetComponent<Movement>().GetInitialSpeed();
+    }
+
+    private void DisableInControlJoystick()
+    {
+        inControlControls.SetActive(false);
+    }
+
+    private void EnableInControlJoystick()
+    {
+        inControlControls.SetActive(true);
     }
 }
